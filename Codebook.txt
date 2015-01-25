@@ -1,0 +1,447 @@
+                  Codebook for Class Project
+
+            Coursera "Getting and Cleaning Data"
+
+        From 'The Data Scientist's Toolbox' Series
+
+
+Introduction
+------------
+
+The goal of Coursera's "Getting and Cleaning Data" course is to teach the 
+concepts of tidy data.  The course project requires students to manipulate
+data from a study of smartphone movement measurements and create one tidy data
+file.  The original data is provided in several files.
+
+See the Readme.md file in this github for details about the R script
+used to create the output.
+
+This codebook describes the 2 output files of the run_analysis.R script.
+
+
+A definition of a tidy data set from   https://github.com/jtleek/datasharing :
+
+   1. Each variable you measure should be in one column
+   2. Each different observation of that variable should be in a different row
+   3. There should be one table for each "kind" of variable
+   4. If you have multiple tables, they should include a column in the table that allows 
+      them to be linked
+
+
+The smartphone study web site:
+
+   http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+
+The data for the project was downloaded from this site:
+
+   https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+
+
+
+Tidy Data File #1
+------------------
+
+tidy_samsung.txt
+
+This file is the result of merging the source data files into one data frame
+
+Its dimensions are 10,299 rows by 69 columns.  
+
+Per the tidy data definition above, each row represents one observation and each
+column represents one variable.
+
+
+Columns:
+
+1. Subject 
+
+   Extracted from the  /train/subject_train.txt  and  /test/subject_test.txt  files.
+
+   It represents the people who participated in this study.  The original data
+   uses numbers 1 through 30, but I replaced them with names to make the 
+   output more recognizable.  The data remains anonymous.
+
+
+2. Activity
+
+   Extracted from the  /train/y_train.txt  and  /test/y_test.txt  files.
+
+   The values 1 through 6 represent the movements that the participants 
+   made while wearing the Samsung phones.
+
+   The values have been converted from numbers to text using the values
+   from the  activity_labels.txt  file:
+
+      1 -> WALKING
+      2 -> WALKING_UPSTAIRS
+      3 -> WALKING_DOWNSTAIRS
+      4 -> SITTING
+      5 -> STANDING
+      6 -> LAYING
+
+
+3. Type
+
+   This column was added to preserve the origin of the row data in case
+   future calculations need to take this into consideration.
+
+      "train" - represents data from the  /train  files
+      "test"  -      "       "    "   "   /test    " 
+
+
+Note:  
+
+Columns 4 through 69 represent the ones with the "mean" or "std" function 
+names.
+
+These were extracted from the  features.txt  file that which 561 variables.
+
+To preserve the integrity of the original data, the names have not been 
+modified except to remove parantheses and commas.  The reason is that 
+while cryptic, these may closely match variables output by the Samsung
+device.
+
+Refer to the  features_info.txt  file for more details on the derivation
+of these variables.  The text from that file is copied to the bottom of this
+one for reference.
+
+
+Unit values -- per the README.txt file in the original data:
+
+   Features are normalized and bounded within [-1,1].
+
+
+4. tBodyAcc-mean-X       time domain body acceleration on X axis, mean value
+5. tBodyAcc-mean-Y       time domain body acceleration on Y axis, mean value
+6. tBodyAcc-mean-Z       time domain body acceleration on Z axis, mean value
+
+7. tBodyAcc-std-X        time domain body acceleration on X axis, standard deviation
+8. tBodyAcc-std-Y        time domain body acceleration on Y axis, standard deviation
+9. tBodyAcc-std-Z        time domain body acceleration on X axis, standard deviation
+
+
+10. tGravityAcc-mean-X   time domain gravity acceleration on X axis, mean value
+11. tGravityAcc-mean-Y   time domain gravity acceleration on Y axis, mean value
+12. tGravityAcc-mean-Z   time domain gravity acceleration on Z axis, mean value
+
+13. tGravityAcc-std-X    time domain gravity acceleration on X axis, standard deviation
+14. tGravityAcc-std-Y    time domain gravity acceleration on Y axis, standard deviation
+15. tGravityAcc-std-Z    time domain gravity acceleration on Z axis, standard deviation
+
+
+16. tBodyAccJerk-mean-X   time domain derived linear and angular velocity on X axis, mean
+17. tBodyAccJerk-mean-Y   time domain derived linear and angular velocity on Y axis, mean
+18. tBodyAccJerk-mean-Z   time domain derived linear and angular velocity on Z axis, mean
+
+19. tBodyAccJerk-std-X    time domain derived linear and angular velocity on X axis, std. dev.
+20. tBodyAccJerk-std-Y    time domain derived linear and angular velocity on X axis, std. dev.
+21. tBodyAccJerk-std-Z    time domain derived linear and angular velocity on X axis, std. dev.
+
+22. tBodyGyro-mean-X      time domain window sample average on angle variable, X axis, mean
+23. tBodyGyro-mean-Y      time domain window sample average on angle variable, Y axis, mean
+24. tBodyGyro-mean-Z      time domain window sample average on angle variable, Z axis, mean
+
+25. tBodyGyro-std-X       time domain window sample average on angle variable, X axis, std. dev.
+26. tBodyGyro-std-Y       time domain window sample average on angle variable, Y axis, std. dev.
+27. tBodyGyro-std-Z       time domain window sample average on angle variable, Z axis, std. dev.
+
+28. tBodyGyroJerk-mean-X  time domain derived linear and angular velocity on X axis, mean
+29. tBodyGyroJerk-mean-Y  time domain derived linear and angular velocity on Y axis, mean
+30. tBodyGyroJerk-mean-Z  time domain derived linear and angular velocity on Z axis, mean
+
+31. tBodyGyroJerk-std-X   time domain derived linear and angular velocity on X axis, std. dev.
+32. tBodyGyroJerk-std-Y   time domain derived linear and angular velocity on Y axis, std. dev.
+33. tBodyGyroJerk-std-Z   time domain derived linear and angular velocity on Z axis, std. dev.
+
+34. tBodyAccMag-mean      
+       time dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, mean 
+35. tBodyAccMag-std       
+       time dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, std. dev.
+
+
+36. tGravityAccMag-mean    
+       time dom. magnitude of XYZ gravity acceleration signals calculated w/Euclidean norm, mean 
+37. tGravityAccMag-std     
+       time dom. magnitude of XYZ gravity acceleration signals calculated w/Euclidean norm, mean 
+
+38. tBodyAccJerkMag-mean   time dom. magnitude of XYZ signals calculated w/Euclidean norm, mean 
+39. tBodyAccJerkMag-std    time dom. magnitude of XYZ signals calculated w/Euclidean norm, std. dev.
+
+40. tBodyGyroMag-mean      time dom. magnitude of XYZ signals calculated w/Euclidean norm, mean 
+41. tBodyGyroMag-std       time dom. magnitude of XYZ signals calculated w/Euclidean norm, std. dev.
+
+42. tBodyGyroJerkMag-mean  time dom. magnitude of XYZ signals calculated w/Euclidean norm, mean 
+43. tBodyGyroJerkMag-std   time dom. magnitude of XYZ signals calculated w/Euclidean norm, std. dev.
+
+
+
+44. fBodyAcc-mean-X        freq. domain magnitude of X axis body acceleration, mean
+45. fBodyAcc-mean-Y        freq. domain magnitude of Y axis body acceleration, mean
+46. fBodyAcc-mean-Z        freq. domain magnitude of Z axis body acceleration, mean
+
+47. fBodyAcc-std-X         freq. domain magnitude of X axis body acceleration, std. dev.
+48. fBodyAcc-std-Y         freq. domain magnitude of Y axis body acceleration, std. dev.
+49. fBodyAcc-std-Z         freq. domain magnitude of Z axis body acceleration, std. dev.
+
+
+50. fBodyAccJerk-mean-X    freq. dom. magnitude of X signal calculated w/Euclidean norm, mean 
+51. fBodyAccJerk-mean-Y    freq. dom. magnitude of Y signal calculated w/Euclidean norm, mean 
+52. fBodyAccJerk-mean-Z    freq. dom. magnitude of Z signal calculated w/Euclidean norm, mean 
+
+53. fBodyAccJerk-std-X     freq. dom. magnitude of X signal calculated w/Euclidean norm, std. dev.
+54. fBodyAccJerk-std-Y     freq. dom. magnitude of Y signal calculated w/Euclidean norm, std. dev.
+55. fBodyAccJerk-std-Z     freq. dom. magnitude of Z signal calculated w/Euclidean norm, std. dev.
+
+56. fBodyGyro-mean-X        freq. domain magnitude of X axis body acceleration, mean
+57. fBodyGyro-mean-Y        freq. domain magnitude of Y axis body acceleration, mean
+58. fBodyGyro-mean-Z        freq. domain magnitude of Z axis body acceleration, mean
+
+59. fBodyGyro-std-X         freq. domain magnitude of X axis body acceleration, std. dev. 
+60. fBodyGyro-std-Y         freq. domain magnitude of Y axis body acceleration, std. dev.
+61. fBodyGyro-std-Z         freq. domain magnitude of Z axis body acceleration, std. dev. 
+
+62. fBodyAccMag-mean        
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, mean
+63. fBodyAccMag-std         
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, std. dev.
+
+64. fBodyBodyAccJerkMag-mean 
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, mean
+65. fBodyBodyAccJerkMag-std 
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, std. dev.
+
+
+66. fBodyBodyGyroMag-mean 
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, mean
+67. fBodyBodyGyroMag-std 
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, std. dev.
+
+
+68. fBodyBodyGyroJerkMag-mean 
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, mean
+69. fBodyBodyGyroJerkMag-std 
+       freq. dom. magnitude of XYZ body acceleration signals calculated w/Euclidean norm, std. dev.
+
+
+
+
+
+Tidy Data File #2
+------------------
+
+tidy_samsung_subset_means.txt
+
+
+This file the output for step #5 in the assignment:
+
+   Create a second, independent tidy data set with the average of 
+   each variable for each activity and each subject.
+
+
+Its dimensions are 180 rows by 68 columns.  
+
+The fewer rows are due to the subsetting of the data per the 
+Activity and Subject variables.
+
+
+
+Columns:
+
+1. Activity
+
+   Same as file #1.
+
+
+2. Subject 
+
+   Same as file #1.
+   
+
+Note:  
+
+Columns 4 through 69 represent the ones with the "mean" or "std" function 
+names.
+
+They have the same names, but contain the calculated mean value for 
+the subsetting computation.
+
+
+
+
+Files from original experiment
+-------------------------------
+
+README.txt
+
+   overall explanation of experiment
+
+
+features_info.txt
+
+   more explanatory text
+
+
+features.txt - 561 rows, 1 colum
+
+   This file contains 561 rows with the names of the test variables.
+   Of these, 53 contain the word "mean"
+             33 contain the word "std"
+
+   These are the columns that need to be extracted.
+
+
+activity_labels.txt - 6 rows, 1 column
+
+   This file contains the 6 scenarios in which the Samsung smartphone accelerometer and
+   gyroscope data was collected:
+
+   1. walking
+   2. walking upstairs
+   3. walking downstairs
+   4. sitting
+   5. standing
+   6. laying
+
+
+
+There are 2 directories that contain more data.  
+
+   training -
+   test 
+
+
+/test
+
+y_test.txt - 2947 rows, 1 column
+
+   Lists the activities (walking, sitting, etc.) associated with the next data file.
+
+X_test.txt - 2947 rows, 561 columns
+
+   Each row contains real numbers that represent data for each of the 561 data labels described in 
+   features.txt.
+
+subject_test.txt - 2947 rows, 1 column
+
+   Each row represents one of the 9 people that was tested (30% of the total population of 30).
+   For the test directory, these numbers are 
+   2, 4, 9, 10, 12, 13, 18, 20, 24 
+
+   /Intertial_Signals
+
+      This looks like extremely raw data, and since none of the labels have descriptors such as
+      "mean" or "std" that need to be extracted, I decided not to read these in.
+
+
+      body_acc_x_test.txt  - 2947 rows, 128 columns
+      body_acc_y_test.txt  - 2947 rows, 128 columns
+      body_acc_z_test.txt  - 2947 rows, 128 columns
+
+      body_gyro_x_test.txt - 2947 rows, 128 columns
+      body_gyro_y_test.txt - 2947 rows, 128 columns
+      body_gyro_z_test.txt - 2947 rows, 128 columns
+
+      total_acc_x_test.txt - 2947 rows, 128 columns
+      total_acc_y_test.txt - 2947 rows, 128 columns
+      total_acc_z_test.txt - 2947 rows, 128 columns
+
+
+/training
+
+   Contains the same files as in /test, except these are for the 21 people who were "trained"
+
+   However, the row count is greater:  7352.
+
+
+
+
+Contents of features_info.txt  file (reformatted):
+---------------------------------------------------
+
+Feature Selection 
+=================
+
+The features selected for this database come from the accelerometer and gyroscope 
+3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals 
+(prefix 't' to denote time) were captured at a constant rate of 50 Hz. 
+Then they were filtered using a median filter and a 3rd order low pass 
+Butterworth filter with a corner frequency of 20 Hz to remove noise. 
+
+Similarly, the acceleration signal was then separated into body and gravity 
+acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass 
+Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived 
+in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). 
+Also the magnitude of these three-dimensional signals were calculated using 
+the Euclidean norm 
+
+(tBodyAccMag, 
+ tGravityAccMag, 
+ tBodyAccJerkMag, 
+ tBodyGyroMag, 
+ tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals 
+producing
+ 
+   fBodyAcc-XYZ, 
+   fBodyAccJerk-XYZ, 
+   fBodyGyro-XYZ, 
+   fBodyAccJerkMag, 
+   fBodyGyroMag, 
+   fBodyGyroJerkMag.    (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are: 
+
+mean(): Mean value
+std(): Standard deviation
+mad(): Median absolute deviation 
+max(): Largest value in array
+min(): Smallest value in array
+sma(): Signal magnitude area
+energy(): Energy measure. Sum of the squares divided by the number of values. 
+iqr(): Interquartile range 
+entropy(): Signal entropy
+arCoeff(): Autorregresion coefficients with Burg order equal to 4
+correlation(): correlation coefficient between two signals
+maxInds(): index of the frequency component with largest magnitude
+meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+skewness(): skewness of the frequency domain signal 
+kurtosis(): kurtosis of the frequency domain signal 
+bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+angle(): Angle between to vectors.
+
+Additional vectors obtained by averaging the signals in a signal window sample. 
+These are used on the angle() variable:
+
+gravityMean
+tBodyAccMean
+tBodyAccJerkMean
+tBodyGyroMean
+tBodyGyroJerkMean
+
+The complete list of variables of each feature vector is available in 'features.txt'
+
+
